@@ -1,0 +1,23 @@
+{
+  "name": "neopaper-main",
+  "version": "0.0.1",
+  "description": "NeoPaper Main Service",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "prod": "node app.js"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Kumar Gaurav",
+    "url": "https://x.com/QurioSapien"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
