@@ -4,9 +4,6 @@ dist/
 docs/
 node_modules/
 
-!.env
-.env.*.local
-.env.local
-bun.lockb
 package-lock.json
+pnpm-lock.yaml
 tsconfig.tsbuildinfo

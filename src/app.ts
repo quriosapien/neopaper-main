@@ -1,16 +1,11 @@
-import express from "express";
-import healthRouter from "./routes/health.route.ts";
+import type { Application } from "express"
+import express from "express"
+import { defaultHandler } from "./handlers/default_handler.ts"
+import { healthRouter } from "./routes/health_route.ts"
 
-const app: express.Application = express();
+export const app: Application = express()
 
-app.use(express.json());
-app.use("/health", healthRouter);
+app.use(express.json())
+app.use("/health", healthRouter)
 
-// Default fallback route handler for unmatched routes
-app.use((_req: express.Request, res: express.Response) => {
-	res.status(404).json({
-    pam: 'Hi, this is Dunder Mifflin NeoPaper Company! How can I help you?'
-  });
-});
-
-export default app;
+app.use(defaultHandler)
