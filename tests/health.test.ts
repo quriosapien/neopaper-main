@@ -6,15 +6,24 @@ import { PORT } from "../src/env.ts"
 describe.concurrent("GET /health", () => {
 	let server: Server | undefined
 
-	beforeAll(() => {
-		server = app.listen(PORT, () => {
-			console.log(`🚀 Server running on port ${PORT}`)
+	beforeAll(async () => {
+		await new Promise((resolve, reject) => {
+			server = app.listen(PORT, error => {
+				if (error) {
+					reject(error)
+					return
+				}
+
+				resolve(error)
+			})
 		})
 	})
 
 	afterAll(async () => {
 		await new Promise((resolve, reject) => {
-			server?.close(err => {
+			if (!server) throw new Error("Server not started")
+
+			server.close(err => {
 				if (err) {
 					reject(err)
 					return
