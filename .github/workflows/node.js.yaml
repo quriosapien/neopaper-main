@@ -26,8 +26,8 @@ jobs:
           node-version: latest
 
       - run: npm ci
-      - run: npm run build --workspaces --if-present
-      - run: npm run lint --if-present
+      - run: npm run build
+      - run: npm run lint
       - run: npm test
 
   fix:
@@ -56,7 +56,7 @@ jobs:
         uses: qoomon/actions--create-commit@v1
         with:
           message: |
-            📌 pnpm install --fix-lockfile
+            📌 npm install --fix-lockfile
 
             [dependabot skip]
           skip-empty: true
@@ -74,25 +74,25 @@ jobs:
             skip-empty: true
 
       - run: |
-          npm run format --if-present
+          npm run format
           git add .
           - id: commit-format
             uses: qoomon/actions--create-commit@v1
             with:
             message: |
-              🎨 pnpm run format
+              🎨 npm run format
 
               [dependabot skip]
             skip-empty: true
 
       - run: |
-          npm run lint:fix --if-present
+          npm run lint:fix
           git add .
           - id: commit-lint
             uses: qoomon/actions--create-commit@v1
             with:
               message: |
-                🚨 pnpm run lint:fix
+                🚨 npm run lint:fix
 
                 [dependabot skip]
               skip-empty: true
