@@ -1,47 +1,47 @@
 {
-	"name": "neopaper-main",
-	"version": "0.0.1",
-	"description": "NeoPaper Main Service",
-	"keywords": [],
-	"license": "ISC",
-	"author": {
-		"name": "Kumar Gaurav",
-		"url": "https://x.com/QurioSapien"
-	},
-	"main": "dist/index.js",
-	"scripts": {
-		"build": "tsgo",
-		"dev": "node ./src/main.ts",
-		"lint": "eslint . && prettier --check .",
-		"lint:fix": "eslint --fix --quiet .; prettier --list-different --write .",
-		"start": "node dist/main.js",
-		"test": "vitest run",
-		"test:watch": "vitest"
-	},
-	"dependencies": {
-		"express": "^5.1.0"
-	},
-	"devDependencies": {
-		"@eslint/js": "^9.35.0",
-		"@types/express": "^5.0.3",
-		"@types/node": "^24.3.1",
-		"@typescript/native-preview": "7.0.0-dev.20250910.1",
-		"eslint": "^9.35.0",
-		"eslint-config-prettier": "^10.1.8",
-		"globals": "^16.4.0",
-		"jiti": "^2.5.1",
-		"prettier": "^3.6.2",
-		"typescript": "^5.9.2",
-		"typescript-eslint": "^8.43.0",
-		"vitest": "^3.2.4"
-	},
-	"type": "module",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
-		}
-	},
-	"types": "dist/index.d.ts",
-	"module": "dist/index.js"
+  "name": "neopaper-main",
+  "version": "0.0.1",
+  "description": "NeoPaper Main Service",
+  "keywords": [],
+  "license": "ISC",
+  "author": {
+    "name": "Kumar Gaurav",
+    "url": "https://x.com/QurioSapien"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsgo",
+    "dev": "node ./src/main.ts",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix --quiet .; prettier --list-different --write .",
+    "start": "node dist/main.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "@typescript/native-preview": "7.0.0-dev.20250910.1",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "jiti": "^2.5.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.43.0",
+    "vitest": "^3.2.4"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js"
 }

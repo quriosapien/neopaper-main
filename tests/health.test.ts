@@ -4,41 +4,41 @@ import { app } from "../src/app.ts"
 import { PORT } from "../src/env.ts"
 
 describe.concurrent("GET /health", () => {
-	let server: Server | undefined
+  let server: Server | undefined
 
-	beforeAll(async () => {
-		await new Promise((resolve, reject) => {
-			server = app.listen(PORT, error => {
-				if (error) {
-					reject(error)
-					return
-				}
+  beforeAll(async () => {
+    await new Promise((resolve, reject) => {
+      server = app.listen(PORT, error => {
+        if (error) {
+          reject(error)
+          return
+        }
 
-				resolve(error)
-			})
-		})
-	})
+        resolve(error)
+      })
+    })
+  })
 
-	afterAll(async () => {
-		await new Promise((resolve, reject) => {
-			if (!server) throw new Error("Server not started")
+  afterAll(async () => {
+    await new Promise((resolve, reject) => {
+      if (!server) throw new Error("Server not started")
 
-			server.close(err => {
-				if (err) {
-					reject(err)
-					return
-				}
+      server.close(err => {
+        if (err) {
+          reject(err)
+          return
+        }
 
-				resolve(err)
-			})
-		})
-	})
+        resolve(err)
+      })
+    })
+  })
 
-	test("should return status ok", async ({ expect }) => {
-		const res = await fetch(`http://localhost:${PORT}/health`)
-		expect(res.status).toBe(200)
+  test("should return status ok", async ({ expect }) => {
+    const res = await fetch(`http://localhost:${PORT}/health`)
+    expect(res.status).toBe(200)
 
-		const json: unknown = await res.json()
-		expect(json).toEqual({ status: "ok" })
-	})
+    const json: unknown = await res.json()
+    expect(json).toEqual({ status: "ok" })
+  })
 })
