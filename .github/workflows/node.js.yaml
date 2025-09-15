@@ -20,18 +20,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-        with:
-          version: latest
       - uses: actions/setup-node@v4
         with:
-          cache: pnpm
+          cache: npm
           node-version: latest
 
-      - run: pnpm install --frozen-lockfile --strict-peer-dependencies
-      - run: pnpm run build --noEmit
-      - run: pnpm run lint
-      - run: pnpm run test
+      - run: npm ci
+      - run: npm run build --workspaces --if-present
+      - run: npm run lint --if-present
+      - run: npm test
 
   fix:
     permissions:
@@ -47,16 +44,13 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref || github.ref }}
-      - uses: pnpm/action-setup@v4
-        with:
-          version: latest
       - uses: actions/setup-node@v4
         with:
-          cache: pnpm
+          cache: npm
           node-version: latest
 
       - run: |
-          pnpm install --fix-lockfile --no-frozen-lockfile
+          npm install
           git add .
       - id: commit-lockfile
         uses: qoomon/actions--create-commit@v1
@@ -68,40 +62,40 @@ jobs:
           skip-empty: true
 
       - run: |
-          pnpm dlx ts-autofix --project tsconfig.json
+          npx ts-autofix --project tsconfig.json
           git add .
-      - id: commit-ts-autofix
-        uses: qoomon/actions--create-commit@v1
-        with:
-          message: |
-            💚 ts-autofix --project tsconfig.json
+          - id: commit-ts-autofix
+            uses: qoomon/actions--create-commit@v1
+            with:
+            message: |
+              💚 ts-autofix --project tsconfig.json
 
-            [dependabot skip]
-          skip-empty: true
+              [dependabot skip]
+            skip-empty: true
 
       - run: |
-          pnpm run format
+          npm run format --if-present
           git add .
-      - id: commit-format
-        uses: qoomon/actions--create-commit@v1
-        with:
-          message: |
-            🎨 pnpm run format
+          - id: commit-format
+            uses: qoomon/actions--create-commit@v1
+            with:
+            message: |
+              🎨 pnpm run format
 
-            [dependabot skip]
-          skip-empty: true
+              [dependabot skip]
+            skip-empty: true
 
       - run: |
-          pnpm run lint:fix
+          npm run lint:fix --if-present
           git add .
-      - id: commit-lint
-        uses: qoomon/actions--create-commit@v1
-        with:
-          message: |
-            🚨 pnpm run lint:fix
+          - id: commit-lint
+            uses: qoomon/actions--create-commit@v1
+            with:
+              message: |
+                🚨 pnpm run lint:fix
 
-            [dependabot skip]
-          skip-empty: true
+                [dependabot skip]
+              skip-empty: true
 
-      - if: steps.commit-lockfile.outputs.commit || steps.commit-ts-autofix.outputs.commit || steps.commit-format.outputs.commit || steps.commit-lint.outputs.commit
-        run: git push
+          - if: steps.commit-lockfile.outputs.commit || steps.commit-ts-autofix.outputs.commit || steps.commit-format.outputs.commit || steps.commit-lint.outputs.commit
+            run: git push
